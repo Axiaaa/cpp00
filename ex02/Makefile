@@ -1,24 +1,24 @@
 NAME = emploi_de_mes_reves
+SRC = tests.cpp Account.cpp
+OBJ = $(SRC:.cpp=.o)
+CFLAGS = -Wall -Wextra -Werror 
 CC = clang++
-# CFLAGS = -Wall -Wextra -Werror
-SRC = Account.cpp \
-		tests.cpp
-
-OBJS = $(SRC:.cpp=.o)
+INCLUDES = -I.
+RM = rm -f
 
 all: $(NAME)
 
-$(NAME): $(ONJS)
-	$(CC) $(CFLAGS) -I. $(SRC) -o $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) -o $(NAME)
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(NAME)
+	$(RM) $(OBJ)
 
 fclean: clean
 
 re: fclean all
 
-.PHONY: all clean re
+.PHONY: all clean fclean re
