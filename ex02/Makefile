@@ -3,10 +3,16 @@ CC = clang++
 # CFLAGS = -Wall -Wextra -Werror
 SRC = Account.cpp \
 		tests.cpp
+
+OBJS = $(SRC:.cpp=.o)
+
 all: $(NAME)
 
-$(NAME): $(SRC)
+$(NAME): $(ONJS)
 	$(CC) $(CFLAGS) -I. $(SRC) -o $(NAME)
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(NAME)

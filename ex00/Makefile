@@ -2,11 +2,15 @@ NAME = megaphone
 CC = clang++
 CFLAGS = -Wall -Wextra -Werror
 SRC = megaphone.cpp
+OBJS = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(SRC)
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(NAME)
