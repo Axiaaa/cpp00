@@ -111,7 +111,7 @@ Account::Account( int initial_deposit )
     std::cout << "created" << std::endl;
 }
 
-/*Desctructeur*/
+/*Descructeur*/
 Account::~Account( void )
 {
     Account::_nbAccounts--;
@@ -124,9 +124,10 @@ Account::~Account( void )
 
 void Account::_displayTimestamp(void)
 {
-    std::time_t now = std::time(nullptr);
+    std::time_t now = std::time(NULL);
     char buffer[80];
     std::strftime(buffer, sizeof(buffer), "%Y%m%d_%H%M%S", std::localtime(&now));
     std::cout << "[" << buffer << "] ";
+    // std::cout << "[19920104_091532] ";
 }
 

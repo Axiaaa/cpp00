@@ -3,9 +3,13 @@
 
 #include <string>
 #include <iostream>
+#include <cstdlib>
+
 
 #define BOLD "\033[1m"
 #define RESET "\033[0m"
+#define EXIT_FAILURE 1
+#define EXIT_SUCCESS 0
 
 class Contact {
 

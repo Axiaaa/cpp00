@@ -18,39 +18,51 @@ int main()
             Contact contact;
 
             do {
-                std::cout << "Enter first name: ";
+                std::cout << "Enter first name: " << std::endl;
                 std::cin >> answer;
+                if (std::cin.fail())
+                    return(EXIT_FAILURE);
                 contact.set_firstName(answer);
             } while (contact.get_firstName().length() == 0);
 
             do {
                 std::cout << "Enter last name: ";
                 std::cin >> answer;
+                if (std::cin.fail())
+                    return(EXIT_FAILURE);
                 contact.set_lastName(answer);
             } while (contact.get_lastName().length() == 0);
 
             do {
-                std::cout << "Enter nickname: ";
+                std::cout << "Enter nickname: " << std::endl;
                 std::cin >> answer;
+                if (std::cin.fail())
+                    return(EXIT_FAILURE);
                 contact.set_nickname(answer);
             } while (contact.get_nickmame().length() == 0);
 
             do {
-                std::cout << "Enter phone number: ";
+                std::cout << "Enter phone number: " << std::endl;
                 std::cin >> answer;
-                for (unsigned int i = 0 ; i < answer.length(); i++)
-                    if (!isdigit(answer[i]))
-                        flag = 1;
-                if (flag == 1)
-                    std::cout << "The phone number must only contains digits !" << std::endl;
-                else 
-                    contact.set_phoneNumber(answer);
-                flag = 0;
+                if (std::cin.fail())
+                    return(EXIT_FAILURE);
+                else {
+                    for (unsigned int i = 0 ; i < answer.length(); i++)
+                        if (!isdigit(answer[i]))
+                            flag = 1;
+                    if (flag == 1)
+                        std::cout << "The phone number must only contains digits !" << std::endl;
+                    else 
+                        contact.set_phoneNumber(answer);
+                    flag = 0; 
+                }
             } while (contact.get_phoneNumber().length() == 0);
 
             do {
                 std::cout << "Enter darkest secret: ";
                 std::cin >> answer;
+                if (std::cin.fail())
+                    return(EXIT_FAILURE);
                 contact.set_darkestSecret(answer);
             } while (contact.get_phoneNumber().length() == 0);
 
@@ -74,7 +86,7 @@ int main()
                     else
                     {
                         std::cout << Phone.get_contact(i).get_lastName();
-                        for (u_int j = 0; j < 10 - Phone.get_contact(i).get_lastName().length(); j++)
+                        for (unsigned long j = 0; j < 10 - Phone.get_contact(i).get_lastName().length(); j++)
                             std::cout << " ";
                         std::cout << "|"; 
                     }
@@ -83,7 +95,7 @@ int main()
                     else
                     {
                         std::cout << Phone.get_contact(i).get_firstName();
-                        for (u_int j = 0; j < 10 - Phone.get_contact(i).get_firstName().length(); j++)
+                        for (unsigned long j = 0; j < 10 - Phone.get_contact(i).get_firstName().length(); j++)
                             std::cout << " ";
                         std::cout << "|"; 
                     }
@@ -92,7 +104,7 @@ int main()
                     else
                     {
                         std::cout << Phone.get_contact(i).get_nickmame();
-                        for (u_int j = 0; j < 10 - Phone.get_contact(i).get_nickmame().length(); j++)
+                        for (unsigned long j = 0; j < 10 - Phone.get_contact(i).get_nickmame().length(); j++)
                             std::cout << " ";
                         std::cout << "|"; 
                     }
@@ -101,11 +113,15 @@ int main()
             }
             std::cout << "Enter the index of the contact you want to see: " << std::endl;
             std::cin >> answer;
-            if (Phone.get_contact(answer[0] - '0').get_firstName() == "")
-                std::cout << "The contact is empty ! Try to add one more." << std::endl;
-
-            else if (answer.length() == 1 && isdigit(answer[0]) && answer[0] - '0' >= 0 && answer[0] - '0' < 8)
-            {
+            if (std::cin.fail())
+                    return(EXIT_FAILURE);
+            if (answer.length() != 1 
+            || !isdigit(answer[0]) 
+            || std::atoi(answer.c_str()) > 7
+            || std::atoi(answer.c_str()) < 0 
+            ||Phone.get_contact(std::atoi(answer.c_str())).empty())
+                std::cout << "Invalid input" << std::endl;
+            else {
                 std::cout << BOLD << "Here are informations about contact n°" << answer[0] << RESET <<std::endl;
                 std::cout << "First name: " << Phone.get_contact(answer[0] - '0').get_firstName() << std::endl;
                 std::cout << "Last name: " << Phone.get_contact(answer[0] - '0').get_lastName() << std::endl;
@@ -113,13 +129,14 @@ int main()
                 std::cout << "Phone number: " << Phone.get_contact(answer[0] - '0').get_phoneNumber() << std::endl;
                 std::cout << "Darkest secret: " << Phone.get_contact(answer[0] - '0').get_darksestSecret() << "\n" << std::endl;
             }
-            else
-                std::cout << "Invalid input" << std::endl;
         }
         else if (answer == "EXIT")
-            exit(EXIT_SUCCESS);
-        else
+            return(EXIT_SUCCESS);
+        else {
+            if (std::cin.fail())
+                return(EXIT_FAILURE);
             std::cout << "Invalid input" << std::endl;
-       }
+        }
+        }
     return 0;
 }
