@@ -80,17 +80,9 @@ void PhoneBook::appendContact(Contact contact)
     }
 }
 
-void PhoneBook::replaceOlder(Contact contact)
+void PhoneBook::replaceOlder(Contact contact, int index)
 {
-    for (int i = 0; i < 8; i++)
-    {
-        if (i == 0)
-            l_contact[i].deleteContact();
-        else if (i == 7)
-            l_contact[i] = contact;
-        else
-            l_contact[i - 1] = l_contact[i];
-    }
+    l_contact[index] = contact;
 }
 
 bool PhoneBook::isfull()

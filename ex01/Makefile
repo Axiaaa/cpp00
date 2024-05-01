@@ -1,5 +1,5 @@
 NAME = 3310
-CC = clang++
+CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS = main.cpp getters_setters.cpp
 OBJS = $(SRCS:.cpp=.o)	

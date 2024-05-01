@@ -9,6 +9,7 @@ int main()
     Phone.init();
     std::string answer;
     int flag = 0;
+    static int index = 0;
     while (42)
     {
         std::cout << "Enter ADD | SEARCH | EXIT" << std::endl;
@@ -65,9 +66,12 @@ int main()
                     return(EXIT_FAILURE);
                 contact.set_darkestSecret(answer);
             } while (contact.get_phoneNumber().length() == 0);
-
+            if (index == 8)
+                index = 0;
+            else 
+                index++;
             if (Phone.isfull())
-                Phone.replaceOlder(contact);
+                Phone.replaceOlder(contact, index);
             else
                 Phone.appendContact(contact);
             std::cout << "Contact added" << std::endl;

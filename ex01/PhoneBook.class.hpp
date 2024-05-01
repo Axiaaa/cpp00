@@ -14,7 +14,7 @@ class PhoneBook {
     bool isfull();
     
     void appendContact(Contact contact);
-    void replaceOlder(Contact contact);
+    void replaceOlder(Contact contact, int index);
     void init();
 
 };
